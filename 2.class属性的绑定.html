@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.aClass{
+				color:red;
+				font-size:50px;
+				
+			}
+			.bClass{
+				color:yellow;
+				font-size:100px;
+			}
+			.cClass{
+				font-style: italic;
+			}
+		</style>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				new Vue({
+					el:'#box',
+					data:{
+						myClass:'bClass',
+						myClass2:'cClass',
+						isShow:true,
+						isShow2:false
+					},
+					methods:{
+						qieHuan(){
+							this.isShow=!this.isShow;
+							this.isShow2=!this.isShow2;
+						}
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<h1 class="aClass">一昂阿斯顿发送到发送到大法师</h1>
+			<!-- 绑定class属性方式1 -->
+			<h1 v-bind:class="'aClass'">一昂阿斯顿发送到发送到大法师</h1>
+			<!-- 绑定多个  -->
+			<h1 v-bind:class="['aClass','cClass']">一昂阿斯顿发送到发送到大法师</h1>
+			
+		
+			
+			<!-- class属性的值可以是一个变量 -->
+			<h1 :class="myClass">嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过</h1>
+			
+			
+			<h1 :class="[myClass,myClass2]">嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过</h1>
+			
+			
+			<!-- class属性是否生效 -->
+			<h1 :class="{'aClass':true,'cClass':false}">222222222222222222222222</h1>
+			
+			
+			<h1 :class="{'aClass':isShow,'bClass':isShow2}">哈哈哈哈哈哈</h1>
+			<button type="button" @click="qieHuan()">切换样式</button>
+			
+		</div>
+	</body>
+</html>

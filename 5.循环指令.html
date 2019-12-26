@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				new Vue({
+					el: '#box',
+					data: {
+						arry: [10, 20, 30, 40, 50],
+						myJson: {
+							'name': 'zhangsan',
+							'age': 23,
+							'sex': '男'
+						},
+						jsonArray: [{
+							'name': 'wangwu',
+							'age': 25,
+							'sex': '男'
+						}, {
+							'name': '赵柳',
+							'age': 26,
+							'sex': '男'
+						}, {
+							'name': '李四',
+							'age': 27,
+							'sex': '男'
+						}]
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li v-for="(ele,index) in arry" :key='index'>
+					{{ele}}----{{index}}
+				</li>
+			</ul>
+
+			<ul>
+				<li v-for="(value,key,index) in myJson" :key='key'>
+					{{key}}---{{value}}---{{index}}
+				</li>
+			</ul>
+			
+			<ul>
+				<li v-for="(ele,index) in jsonArray" :key='index'>
+					{{ele.name}}---{{ele.age}}---{{ele.sex}}---{{index}}
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

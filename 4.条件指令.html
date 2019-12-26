@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				new Vue({
+					el:'#box',
+					data:{
+						isShow:true
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+	  <div id="box">
+	  	<h1 v-if="isShow">真的</h1>
+		<h1 v-else>假的</h1>
+		<button type="button" @click="show(isShow=!isShow)">切换</button>
+	  </div>
+	</body>
+</html>

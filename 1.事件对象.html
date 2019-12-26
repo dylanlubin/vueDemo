@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				new Vue({
+					el:'#box',
+					data:{
+						
+					},
+					methods:{
+						show:function(e){
+							//alert(e);
+							var v=e.target.innerText;
+							alert(v);
+						},
+						into(e){
+							alert("你要进入一个页面");
+							e.preventDefault();
+						},
+						into2(){
+							alert("你要进入一个页面");
+							
+						},
+						wai(){
+							alert("wai");
+							//e.stopPropagation();
+							
+						},
+						nei(){
+							alert("nei");
+							//e.stopPropagation();
+						},
+						sousuo(e){
+							/* if(e.keyCode==13){
+								alert("开始搜索");
+							} */
+							alert("开始搜索");
+							
+						},
+						test(e){
+						/* 	if(e.which==2){
+								alert("滚轮按下了")
+							} */
+							alert("滚轮按下了")
+						}
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<!-- 传递事件对象  $event -->
+			<button type="button" @click="show($event)">一个按钮</button>
+			<a href="http://www.baidu.com" @click="into($event)">进入百度</a>
+			<!-- Vue提供的阻止元素的默认行为
+			 
+			  @click.prevent 阻止默认行为
+			  @click.stop 阻止冒泡行为
+			 -->
+			<a href="http://www.baidu.com" @click.prevent="into2()">进入百度</a>
+			
+			<div class="" @click.stop="wai()" style="width: 200px;height: 200px;background: red;">
+				<button type="button" @click.stop="nei()">一个按钮</button>
+			</div>
+			
+			<!-- 监听键盘事件 
+			为了在必要的情况下支持旧浏览器，Vue 提供了绝大多数常用的按键码的别名：
+			
+			.enter
+			.tab
+			.delete (捕获“删除”和“退格”键)
+			.esc
+			.space
+			.up
+			.down
+			.left
+			.right
+			
+			@keypress.enter="sousuo()
+			@keypress.13="sousuo()
+			
+			
+			可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。
+			
+			.ctrl
+			.alt
+			.shift
+			.meta
+			
+			Alt + C 同时按下Alt+C 进行监听
+			<input @keyup.alt.67="clear">
+			鼠标按钮修饰符
+			2.2.0 新增
+			
+			.left
+			.right
+			.middlett
+			-->
+			<input type="text" id="" value="" placeholder="请输入搜索内容，按回车键搜索" @keypress.enter="sousuo()"/>
+			
+			<button @mousedown.middle="test($event)">aaaa</button>
+		</div>
+	</body>
+
+</html>

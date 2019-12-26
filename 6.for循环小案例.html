@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				new Vue({
+					el: '#box',
+					data: {
+						jsonArray: [{
+							'name': '张三',
+							'age': 24,
+							'sex': '男'
+						}, {
+							'name': '李四',
+							'age': 25,
+							'sex': '男'
+						}, {
+							'name': '王五',
+							'age': 26,
+							'sex': '男'
+						}]
+					},
+					methods: {
+						delObj(index) {
+							var name = this.jsonArray[index].name;
+							if (window.confirm("你确认要删除" + name + "吗?")) {
+								this.jsonArray.splice(index, 1);
+							}
+
+						},
+						update(index, obj) {
+							/* 数组更新检测
+							变异方法 (mutation method)
+							Vue 将被侦听的数组的变异方法进行了包裹，所以它们也将会触发视图更新。这些被包裹过的方法包括：
+							
+							push()
+							pop()
+							shift()
+							unshift()
+							splice()
+							sort()
+							reverse() */
+							//修改
+							//this.jsonArray[index]=obj;
+							//this.jsonArray.reverse().reverse();
+							this.jsonArray.splice(index, 1, obj);
+						}
+
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li v-for="(ele,index) in jsonArray" :key='index'>
+					{{index}}----{{ele.name}}---{{ele.age}}---{{ele.sex}}---<button type="button" @click="delObj(index)">删除</button><button
+					 type="button" @click="update(index,{
+							'name': '赵六',
+							'age': 24,
+							'sex': '男'
+						})">修改</button>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
