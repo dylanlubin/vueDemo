@@ -26,12 +26,15 @@
 							'name': 'zhaoliu',
 							'age': 26,
 							'sex': '男'
-						}]
+						}],
+						copyArray: []
+
 					},
 					//计算属性
 					computed: {
 						newArray: function() {
-							console.log("调用")
+							console.log("调用");
+							
 							var text = this.content; //变化
 							var arr = this.jsonArray.filter(function(ele) {
 								if (ele.name.indexOf(text) != -1) {
@@ -42,6 +45,7 @@
 							});
 							return arr;
 						}
+
 					},
 					methods: {
 						sortObj(num) {
@@ -55,12 +59,17 @@
 								this.jsonArray.sort(function(a, b) {
 									return b.age - a.age;
 								})
-							} else {
+							} else if (num == 3) {
 								//默认顺序
+								this.jsonArray = this.copyArray.slice(0);
 							}
 						}
+
+					},
+					mounted(){
+						this.copyArray = this.jsonArray.slice(0);
 					}
-				})
+				});
 			}
 		</script>
 	</head>
@@ -69,7 +78,6 @@
 			<center>
 
 				<input type="text" id="" value="" placeholder="请输入搜索的内容" v-model="content" />
-
 				<ul style="list-style: none;">
 					<li v-for="(ele,index) in newArray" :key="index">
 						{{ele.name}}---{{ele.sex}}---{{ele.age}}

@@ -5,41 +5,77 @@
 		<title></title>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			window.onload=function(){
+			window.onload = function() {
 				new Vue({
-					el:'#box',
-					data:{
+					el: '#box',
+					data: {
 						//表格展示的数据从JSON数组中拿
-						name:'',
-						age:'',
-						jsonArray:[]
+						name: '',
+						age: '',
+						jsonArray: []
 					},
-					methods:{
-						addObj(){
+					methods: {
+						addObj() {
 							//alert("添加");
 							//做非空判断
-							if(!this.name.trim()||!this.age.trim()){
+							if (!this.name.trim() || !this.age.trim()) {
 								alert("姓名和年龄不能为空")
 								return;
 							}
-							var json={'name':this.name.trim(),'age':this.age.trim()};
+							var json = {
+								'name': this.name.trim(),
+								'age': this.age.trim()
+							};
 							//把json对象 添加到数组里面
 							this.jsonArray.push(json);
-							
+
 							//清空旧值
-							this.name='';
-							this.age='';
+							this.name = '';
+							this.age = '';
 						},
 						//删除全部
-						delAll(){
-							if(window.confirm("确认要删除全部吗")){
-								this.jsonArray=[];
+						delAll() {
+
+							if (window.confirm("确认要删除全部吗")) {
+								this.jsonArray = [];
 							}
+
 						},
 						//修改
-						updateName(){
-							var v=window.prompt("请填入新的姓名");
+						updateName(index) {
+							var name = window.prompt("请填入新的姓名");
+							this.jsonArray[index].name = name;
+
+
+						},
+						updateAge(index) {
+							var age = window.prompt("请填入新的年龄");
+							this.jsonArray[index].age = age;
+						},
+						delSin(index) {
+							if (window.confirm("确认要删除吗")) {
+								this.jsonArray.splice(index, 1);
+							}
+						},
+						// del:false,
+						// alldel:true
+						allDel() {
+							if (this.jsonArray.length == 0) {
+								return false;
+							} else {
+								return true;
+							}
+						},
+						show(){
+							if (this.jsonArray.length == 0) {
+								return true;
+							} else {
+								return false;
+							}
 						}
+
+
+
 					}
 				})
 			}
@@ -50,7 +86,7 @@
 			<center>
 				<input type="" name="" id="" value="" placeholder="请输入姓名" v-model="name" />
 				<input type="" name="" id="" value="" placeholder="请输入年龄" v-model="age" />
-				<input type="button" name="" id="" value="添加" @click="addObj()"/>
+				<input type="button" name="" id="" value="添加" @click="addObj()" />
 				<br>
 				<br>
 				<br>
@@ -64,12 +100,15 @@
 					</tr>
 					<tr v-for="(ele,index) in jsonArray" :key="index">
 						<td>{{index+1}}</td>
-						<td>{{ele.name}}<a href="#" @click.prevent="updateName()">修改</a></td>
-						<td>{{ele.age}}<a href="#" @click.prevent="updateAge()">修改</a></td>
-						<td><button type="button">删除</button></td>
+						<td>{{ele.name}}<a href="#" @click.prevent="updateName(index)">修改</a></td>
+						<td>{{ele.age}}<a href="#" @click.prevent="updateAge(index)">修改</a></td>
+						<td><button type="button" @click="delSin(index)">删除</button></td>
 					</tr>
 					<tr align="center">
-						<td colspan="4"><button type="button" v-on:click="delAll()">全部删除</button></td>
+						<td colspan="4"><button type="button" v-on:click="delAll()" v-if="allDel()">全部删除</button>
+							<span v-if="show()">没有更多元素</span>
+						</td>
+
 					</tr>
 				</table>
 			</center>
